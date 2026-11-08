@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Nhà Thám Hiểm Từ Ngữ – Giải Mã Bản Xô-nát Ánh Trăng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --bg-sky: #E0F2FE;
+      --bg-lavender: #EDE9FE;
+      --bg-pink: #FCE7F3;
+      --primary: #3B82F6;
+      --primary-hover: #2563EB;
+      --accent-yellow: #FEF08A;
+      --accent-mint: #A7F3D0;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --shadow-cute: 0 10px 25px -5px rgba(148, 163, 184, 0.25), 0 8px 10px -6px rgba(148, 163, 184, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--bg-sky) 0%, var(--bg-lavender) 50%, var(--bg-pink) 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      font-size: 16px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid #E2E8F0;
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      font-size: 32px;
+      animation: float 3.5s ease-in-out infinite;
+    }
+
+    .brand-title {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      background: linear-gradient(45deg, #2563EB, #7C3AED);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-header {
+      background: #F1F5F9;
+      border: 2px solid #CBD5E1;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-header:hover {
+      background: #E2E8F0;
+      border-color: #94A3B8;
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .view-screen {
+      display: none;
+      animation: fadeIn 0.35s ease-out;
+    }
+
+    .view-screen.active {
+      display: block;
+    }
+
+    /* Màn hình Khởi động */
+    .hero-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: var(--radius-lg);
+      padding: 34px 28px;
+      text-align: center;
+      max-width: 600px;
+      margin: 25px auto;
+      box-shadow: var(--shadow-cute);
+      border: 3px solid #E0F2FE;
+    }
+
+    .mascot-group {
+      font-size: 50px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .mascot-icon {
+      animation: bounce 2.2s infinite alternate ease-in-out;
+    }
+    .mascot-icon:nth-child(2) { animation-delay: 0.3s; }
+    .mascot-icon:nth-child(3) { animation-delay: 0.6s; }
+
+    .hero-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #1E3A8A;
+      margin-bottom: 8px;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 18px;
+      font-size: 1.05rem;
+      font-family: 'Nunito', sans-serif;
+      border: 2px solid #CBD5E1;
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: all 0.2s;
+      background: #F8FAFC;
+    }
+
+    .form-input:focus {
+      border-color: #3B82F6;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, #3B82F6, #2563EB);
+      color: white;
+      border: none;
+      padding: 15px 34px;
+      font-size: 1.15rem;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.45);
+    }
+
+    /* Màn hình Khám phá */
+    .game-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .student-badge-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: 2px solid #E2E8F0;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #1E293B;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .reading-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 26px 30px;
+      border: 3px solid #BFDBFE;
+      box-shadow: var(--shadow-cute);
+      position: relative;
+    }
+
+    .reading-header {
+      text-align: center;
+      border-bottom: 2px dashed #E2E8F0;
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+
+    .reading-badge {
+      display: inline-block;
+      background: #EFF6FF;
+      color: #1D4ED8;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .reading-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #1E3A8A;
+      letter-spacing: 0.3px;
+    }
+
+    .reading-instructions {
+      background: #FFFBEB;
+      border: 2px dashed #FCD34D;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      color: #92400E;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+
+    .reading-text {
+      font-size: 1.15rem;
+      line-height: 2.2;
+      color: #1E293B;
+      text-align: justify;
+      word-spacing: 0.05em;
+    }
+
+    .reading-text p {
+      margin-bottom: 16px;
+      text-indent: 2.2em;
+    }
+
+    .reading-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .selectable-word {
+      display: inline;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      padding: 2px 4px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .selectable-word:hover {
+      background-color: var(--accent-yellow);
+    }
+
+    .selectable-word.selected {
+      background: #BAE6FD;
+      color: #0369A1;
+      font-weight: 800;
+      box-shadow: 0 0 0 2px #38BDF8;
+    }
+
+    /* Khay Thẻ Từ đã chọn */
+    .tray-section {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 20px;
+      border: 3px solid #E0E7FF;
+      box-shadow: var(--shadow-cute);
+    }
+
+    .section-title-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #3730A3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tray-counter {
+      background: #EEF2FF;
+      color: #4F46E5;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .word-cards-container {
+      min-height: 68px;
+      background: #F8FAFC;
+      border: 2px dashed #CBD5E1;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .tray-empty-hint {
+      color: #94A3B8;
+      font-size: 0.95rem;
+      font-style: italic;
+      width: 100%;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    /* Thẻ từ kéo thả */
+    .word-card {
+      background: #FFFFFF;
+      border: 2px solid #38BDF8;
+      border-radius: 25px;
+      padding: 8px 16px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #0369A1;
+      cursor: grab;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
+      transition: transform 0.15s, box-shadow 0.15s;
+      touch-action: none;
+    }
+
+    .word-card:active {
+      cursor: grabbing;
+      transform: scale(1.06);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
+    }
+
+    .word-card .card-remove-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .word-card .card-remove-btn:hover {
+      background: #EF4444;
+      color: white;
+    }
+
+    /* 2 Nhóm Phân Loại */
+    .classification-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .dropzone-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 20px;
+      border: 3px solid transparent;
+      box-shadow: var(--shadow-cute);
+      display: flex;
+      flex-direction: column;
+      min-height: 250px;
+      transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+    }
+
+    .dropzone-card.zone-river {
+      border-color: #7DD3FC;
+      background: linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 60px);
+    }
+
+    .dropzone-card.zone-music {
+      border-color: #D8B4FE;
+      background: linear-gradient(180deg, #FAF5FF 0%, #FFFFFF 60px);
+    }
+
+    .dropzone-card.drag-over {
+      background-color: #FEF9C3 !important;
+      border-color: #FACC15 !important;
+      transform: scale(1.015);
+    }
+
+    .dropzone-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #F1F5F9;
+      padding-bottom: 12px;
+    }
+
+    .dropzone-icon {
+      font-size: 32px;
+    }
+
+    .dropzone-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #1E293B;
+      line-height: 1.3;
+    }
+
+    .dropzone-body {
+      flex: 1;
+      border: 2px dashed #CBD5E1;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-content: flex-start;
+      min-height: 140px;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .dropzone-hint {
+      color: #94A3B8;
+      font-size: 0.95rem;
+      font-style: italic;
+      text-align: center;
+      width: 100%;
+      margin-top: 40px;
+      pointer-events: none;
+    }
+
+    /* Nút Thao Tác Nộp Bài / Làm Lại */
+    .game-actions-bar {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 15px;
+      position: relative;
+      z-index: 20;
+    }
+
+    .btn-action {
+      padding: 15px 34px;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .btn-reset {
+      background: #F1F5F9;
+      color: #475569;
+      border: 2px solid #CBD5E1;
+    }
+    .btn-reset:hover { background: #E2E8F0; }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: white;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+      border: 2px solid #047857;
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(16, 185, 129, 0.45);
+    }
+
+    /* Giao diện Giáo viên */
+    .teacher-panel {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-cute);
+      border: 3px solid #E2E8F0;
+    }
+
+    .teacher-top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #F1F5F9;
+      padding-bottom: 16px;
+      margin-bottom: 22px;
+    }
+
+    .teacher-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .submissions-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .submissions-table th {
+      background: #F8FAFC;
+      padding: 12px 14px;
+      text-align: left;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      color: #475569;
+      font-size: 0.95rem;
+      border-bottom: 2px solid #E2E8F0;
+    }
+
+    .submissions-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #F1F5F9;
+      font-size: 0.95rem;
+      vertical-align: middle;
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .status-reviewed { background: #DCFCE7; color: #15803D; }
+    .status-new { background: #FEF3C7; color: #B45309; }
+
+    .btn-view-work {
+      background: #3B82F6;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-view-work:hover { background: #2563EB; }
+
+    /* Màn hình Chấm / Đánh Giá Bài */
+    .review-detail-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 22px;
+      border: 2px solid #CBD5E1;
+      margin-top: 14px;
+    }
+
+    .student-info-banner {
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: var(--radius-sm);
+      padding: 12px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .eval-group-card {
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .eval-group-title {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #1E293B;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .student-classified-words {
+      background: white;
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      min-height: 48px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .word-badge-review {
+      background: #E0F2FE;
+      color: #0369A1;
+      border: 1px solid #7DD3FC;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    /* Thẻ từ do Giáo viên bổ sung: Màu sắc khác biệt, nổi bật */
+    .word-badge-teacher {
+      background: linear-gradient(135deg, #F3E8FF 0%, #EDE9FE 100%);
+      color: #7E22CE;
+      border: 1.5px solid #A855F7;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(168, 85, 247, 0.2);
+    }
+
+    .badge-remove-btn {
+      cursor: pointer;
+      font-weight: 900;
+      color: #9333EA;
+      font-size: 15px;
+      line-height: 1;
+      margin-left: 2px;
+      transition: color 0.15s;
+    }
+    .badge-remove-btn:hover {
+      color: #DC2626;
+    }
+
+    .teacher-add-input-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .input-add-word {
+      flex: 1;
+      padding: 8px 12px;
+      border: 2px solid #CBD5E1;
+      border-radius: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .btn-add-word {
+      background: #8B5CF6;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-add-word:hover { background: #7C3AED; }
+
+    /* 6 Ô Đánh Giá Đúng / Sai ĐẬM MÀU */
+    .eval-squares-label {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #475569;
+      margin-bottom: 8px;
+    }
+
+    .eval-squares-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .eval-square {
+      width: 86px;
+      height: 64px;
+      border-radius: 12px;
+      border: 3px dashed #94A3B8;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .eval-square:hover {
+      border-color: #3B82F6;
+      transform: translateY(-2px);
+    }
+
+    .eval-square .square-idx {
+      font-size: 0.75rem;
+      color: #64748B;
+      margin-bottom: 2px;
+    }
+
+    .eval-square .square-val {
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+
+    /* Trạng thái ĐÚNG */
+    .eval-square.is-correct {
+      background: linear-gradient(135deg, #15803D, #16A34A) !important;
+      border: 3px solid #14532D !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.45) !important;
+    }
+    .eval-square.is-correct .square-idx { color: #DCFCE7 !important; }
+    .eval-square.is-correct .square-val { color: #FFFFFF !important; }
+
+    /* Trạng thái SAI */
+    .eval-square.is-wrong {
+      background: linear-gradient(135deg, #B91C1C, #DC2626) !important;
+      border: 3px solid #7F1D1D !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.45) !important;
+    }
+    .eval-square.is-wrong .square-idx { color: #FEE2E2 !important; }
+    .eval-square.is-wrong .square-val { color: #FFFFFF !important; }
+
+    .teacher-comment-box {
+      margin-top: 16px;
+    }
+
+    .teacher-textarea {
+      width: 100%;
+      min-height: 90px;
+      border: 2px solid #CBD5E1;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      resize: vertical;
+    }
+
+    .teacher-textarea:focus {
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    }
+
+    /* MODAL POPUPS */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.active { display: flex; }
+
+    .modal-box {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 26px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      border: 3px solid #E2E8F0;
+      animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-actions-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .eval-choice-btns {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn-choice {
+      flex: 1;
+      padding: 15px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .btn-choice-correct {
+      background: #16A34A;
+      color: white;
+      border: 2px solid #14532D;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35);
+    }
+    .btn-choice-correct:hover { background: #15803D; transform: translateY(-2px); }
+
+    .btn-choice-wrong {
+      background: #DC2626;
+      color: white;
+      border: 2px solid #7F1D1D;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+    }
+    .btn-choice-wrong:hover { background: #B91C1C; transform: translateY(-2px); }
+
+    .btn-choice-clear {
+      margin-top: 10px;
+      width: 100%;
+      background: #F1F5F9;
+      color: #64748B;
+      border: 1px solid #CBD5E1;
+      padding: 9px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      from { opacity: 0; scale: 0.9; }
+      to { opacity: 1; scale: 1; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 640px) {
+      .reading-card { padding: 18px 14px; }
+      .reading-text { font-size: 1.05rem; line-height: 2.0; }
+      .hero-card { padding: 20px 14px; }
+      .hero-title { font-size: 1.45rem; }
+      .btn-action { padding: 13px 22px; font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">🌙🎹</div>
+      <div>
+        <div class="brand-title">NHÀ THÁM HIỂM TỪ NGỮ</div>
+        <div class="brand-subtitle">Giải Mã Bản Xô-nát Ánh Trăng • Tiếng Việt Lớp 4</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="btn-header" id="btnToggleSound" onclick="toggleSound()">
+        <span id="soundIcon">🔔</span> <span id="soundLabel">Âm thanh</span>
+      </button>
+      <button type="button" class="btn-header" id="btnToggleTeacher" onclick="toggleTeacherView()">
+        <span>👩‍🏫</span> <span id="teacherBtnText">Dành cho Giáo viên</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- 1. MÀN HÌNH KHỞI ĐỘNG -->
+    <section id="screenIntro" class="view-screen active">
+      <div class="hero-card">
+        <div class="mascot-group">
+          <span class="mascot-icon">🎼</span>
+          <span class="mascot-icon">✨</span>
+          <span class="mascot-icon">🎹</span>
+        </div>
+        <h1 class="hero-title">Chào Mừng Nhà Thám Hiểm!</h1>
+        <p class="hero-desc">Hãy cùng lắng nghe giai điệu và giải mã những từ ngữ tuyệt đẹp miêu tả tiếng nhạc và dòng sông Đa-nuýp nhé!</p>
+        
+        <div class="form-group">
+          <label class="form-label">Họ và tên của em: <span style="color:#EF4444;">*</span></label>
+          <input type="text" id="inputStudentName" class="form-input" placeholder="Ví dụ: Nguyễn Văn An" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Lớp: <span style="color:#EF4444;">*</span></label>
+          <input type="text" id="inputStudentClass" class="form-input" placeholder="Ví dụ: 4A, 4B..." autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Mã bài tập:</label>
+          <input type="text" id="inputAssignmentCode" class="form-input" placeholder="Ví dụ: XONAT2026" value="XONAT2026">
+        </div>
+
+        <button type="button" class="btn-main" onclick="startAdventure()">
+          <span>BẮT ĐẦU KHÁM PHÁ</span>
+          <span>🚀</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. MÀN HÌNH CHƠI GAME CỦA HỌC SINH -->
+    <section id="screenGame" class="view-screen">
+      <div class="game-layout">
+
+        <div class="student-badge-bar">
+          <div>👦 Học sinh: <span id="displayStudentName" style="color:#2563EB;"></span> - Lớp: <span id="displayStudentClass"></span></div>
+          <div>Mã bài: <span id="displayAssignmentCode" style="color:#7C3AED;"></span></div>
+        </div>
+
+        <div class="reading-card">
+          <div class="reading-header">
+            <span class="reading-badge">Bài tập đọc</span>
+            <h2 class="reading-title">BẢN XÔ-NÁT ÁNH TRĂNG</h2>
+          </div>
+
+          <div class="reading-instructions">
+            <span>💡</span>
+            <span>Em hãy đọc bài văn và <strong>chạm hoặc nhấp chuột vào từ ngữ</strong> để tạo thẻ từ, sau đó kéo các thẻ vào 2 nhóm bên dưới nhé!</span>
+          </div>
+
+          <div class="reading-text" id="readingContainer"></div>
+        </div>
+
+        <div class="tray-section">
+          <div class="section-title-wrap">
+            <div class="section-title">
+              <span>🏷️</span>
+              <span>THẺ TỪ ĐÃ CHỌN TỪ BÀI VĂN</span>
+            </div>
+            <div class="tray-counter" id="trayCounter">0 thẻ</div>
+          </div>
+          <div class="word-cards-container" id="trayDropzone" ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'tray')">
+            <div class="tray-empty-hint" id="trayHint">Chạm vào một từ trong bài đọc ở trên để tạo thẻ từ tại đây nhé!</div>
+          </div>
+        </div>
+
+        <!-- 2 KHU VỰC PHÂN LOẠI -->
+        <div class="classification-grid">
+          
+          <div class="dropzone-card zone-river" ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'river')">
+            <div class="dropzone-header">
+              <div class="dropzone-icon">🌊</div>
+              <div>
+                <h3 class="dropzone-title">Tính từ chỉ đặc điểm của dòng sông</h3>
+                <div style="font-size:0.85rem; color:#0369A1; font-weight:700;">Dòng sông Đa-nuýp dưới ánh trăng</div>
+              </div>
+            </div>
+            <div class="dropzone-body" id="zoneRiver">
+              <div class="dropzone-hint" id="riverHint">Kéo thả các thẻ từ miêu tả dòng sông vào đây</div>
+            </div>
+          </div>
+
+          <div class="dropzone-card zone-music" ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'music')">
+            <div class="dropzone-header">
+              <div class="dropzone-icon">🎹</div>
+              <div>
+                <h3 class="dropzone-title">Tính từ chỉ đặc điểm của tiếng nhạc</h3>
+                <div style="font-size:0.85rem; color:#7E22CE; font-weight:700;">Giai điệu bản xô-nát diệu kỳ</div>
+              </div>
+            </div>
+            <div class="dropzone-body" id="zoneMusic">
+              <div class="dropzone-hint" id="musicHint">Kéo thả các thẻ từ miêu tả tiếng nhạc vào đây</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- THANH NÚT BẤM -->
+        <div class="game-actions-bar">
+          <button type="button" class="btn-action btn-reset" onclick="openResetConfirmModal()">
+            <span>🔄</span> <span>LÀM LẠI</span>
+          </button>
+          <button type="button" class="btn-action btn-submit" id="btnSubmitWork" onclick="openSubmitConfirmModal()">
+            <span>📬</span> <span>NỘP BÀI</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. MÀN HÌNH QUẢN LÝ CỦA GIÁO VIÊN -->
+    <section id="screenTeacher" class="view-screen">
+      <div class="teacher-panel">
+        
+        <div id="teacherLoginCard" style="max-width: 400px; margin: 30px auto; text-align: center;">
+          <div style="font-size: 50px; margin-bottom: 12px;">🔐</div>
+          <h2 style="font-family:'Quicksand', sans-serif; font-size:1.5rem; margin-bottom: 8px;">Đăng Nhập Giáo Viên</h2>
+          <p style="color:var(--text-muted); margin-bottom: 20px;">Mật khẩu quản trị: <strong>123456</strong></p>
+          <div class="form-group">
+            <input type="password" id="inputTeacherPassword" class="form-input" placeholder="Nhập mật khẩu..." onkeydown="if(event.key==='Enter') loginTeacher()">
+          </div>
+          <button type="button" class="btn-main" onclick="loginTeacher()">ĐĂNG NHẬP QUẢN TRỊ</button>
+        </div>
+
+        <div id="teacherContent" style="display: none;">
+          
+          <div class="teacher-top-nav">
+            <div class="teacher-title">
+              <span>📋</span> <span>DANH SÁCH BÀI LÀM CỦA HỌC SINH</span>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button type="button" class="btn-header" style="background:#FEE2E2; border-color:#FCA5A5; color:#991B1B;" onclick="openClearConfirmModal()">
+                <span>🗑️</span> <span>XÓA BÀI NỘP CŨ</span>
+              </button>
+              <button type="button" class="btn-header" onclick="logoutTeacher()">
+                <span>🚪</span> <span>Đăng xuất</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="submissionsListView">
+            <div style="overflow-x: auto;">
+              <table class="submissions-table">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>Lớp</th>
+                    <th>Mã bài</th>
+                    <th>Thời gian nộp</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="submissionsTableBody"></tbody>
+              </table>
+            </div>
+            <div id="noSubmissionsHint" style="text-align: center; color: #94A3B8; padding: 40px; font-style: italic;">
+              Chưa có học sinh nào nộp bài. Dữ liệu khi học sinh nộp sẽ được lưu an toàn tại đây!
+            </div>
+          </div>
+
+          <div id="submissionDetailView" style="display: none;">
+            <div style="margin-bottom: 16px;">
+              <button type="button" class="btn-header" onclick="backToSubmissionsList()">
+                <span>⬅️</span> <span>QUAY LẠI DANH SÁCH HỌC SINH</span>
+              </button>
+            </div>
+
+            <div class="review-detail-card">
+              <div class="student-info-banner" id="reviewStudentBanner"></div>
+
+              <h3 style="font-family:'Quicksand', sans-serif; font-size:1.35rem; color:#1E3A8A; margin-bottom:18px;">
+                NHẬN XÉT BÀI LÀM HỌC SINH
+              </h3>
+
+              <!-- NHÓM A: DÒNG SÔNG -->
+              <div class="eval-group-card">
+                <div class="eval-group-title">
+                  <span>🌊</span> <span>A. TÍNH TỪ CHỈ ĐẶC ĐIỂM CỦA DÒNG SÔNG</span>
+                </div>
+                
+                <div style="font-size:0.9rem; font-weight:700; color:#475569; margin-bottom:6px;">Từ ngữ trong bài làm (học sinh chọn và giáo viên bổ sung):</div>
+                <div class="student-classified-words" id="reviewWordsRiver"></div>
+
+                <div class="teacher-add-input-bar">
+                  <input type="text" id="inputAddRiver" class="input-add-word" placeholder="Nhập từ bổ sung cho nhóm Dòng Sông (gõ xong ấn Enter hoặc nút Thêm)..." onkeydown="if(event.key==='Enter') addTeacherWord('river')">
+                  <button type="button" class="btn-add-word" onclick="addTeacherWord('river')">+ Thêm vào nhóm</button>
+                </div>
+
+                <div class="eval-squares-label">Đánh giá 3 ô kiểm tra (Chạm vào từng ô để chọn ĐÚNG/SAI):</div>
+                <div class="eval-squares-row">
+                  <div class="eval-square" id="sqRiver0" onclick="openEvalModal('river', 0)">
+                    <div class="square-idx">Ô 1</div>
+                    <div class="square-val" id="valRiver0">-</div>
+                  </div>
+                  <div class="eval-square" id="sqRiver1" onclick="openEvalModal('river', 1)">
+                    <div class="square-idx">Ô 2</div>
+                    <div class="square-val" id="valRiver1">-</div>
+                  </div>
+                  <div class="eval-square" id="sqRiver2" onclick="openEvalModal('river', 2)">
+                    <div class="square-idx">Ô 3</div>
+                    <div class="square-val" id="valRiver2">-</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- NHÓM B: TIẾNG NHẠC -->
+              <div class="eval-group-card">
+                <div class="eval-group-title">
+                  <span>🎹</span> <span>B. TÍNH TỪ CHỈ ĐẶC ĐIỂM CỦA TIẾNG NHẠC</span>
+                </div>
+
+                <div style="font-size:0.9rem; font-weight:700; color:#475569; margin-bottom:6px;">Từ ngữ trong bài làm (học sinh chọn và giáo viên bổ sung):</div>
+                <div class="student-classified-words" id="reviewWordsMusic"></div>
+
+                <div class="teacher-add-input-bar">
+                  <input type="text" id="inputAddMusic" class="input-add-word" placeholder="Nhập từ bổ sung cho nhóm Tiếng Nhạc (gõ xong ấn Enter hoặc nút Thêm)..." onkeydown="if(event.key==='Enter') addTeacherWord('music')">
+                  <button type="button" class="btn-add-word" onclick="addTeacherWord('music')">+ Thêm vào nhóm</button>
+                </div>
+
+                <div class="eval-squares-label">Đánh giá 3 ô kiểm tra (Chạm vào từng ô để chọn ĐÚNG/SAI):</div>
+                <div class="eval-squares-row">
+                  <div class="eval-square" id="sqMusic0" onclick="openEvalModal('music', 0)">
+                    <div class="square-idx">Ô 1</div>
+                    <div class="square-val" id="valMusic0">-</div>
+                  </div>
+                  <div class="eval-square" id="sqMusic1" onclick="openEvalModal('music', 1)">
+                    <div class="square-idx">Ô 2</div>
+                    <div class="square-val" id="valMusic1">-</div>
+                  </div>
+                  <div class="eval-square" id="sqMusic2" onclick="openEvalModal('music', 2)">
+                    <div class="square-idx">Ô 3</div>
+                    <div class="square-val" id="valMusic2">-</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="teacher-comment-box">
+                <label class="form-label">NHẬN XÉT CỦA GIÁO VIÊN:</label>
+                <textarea id="teacherCommentText" class="teacher-textarea" placeholder="Nhập nhận xét sư phạm dành cho học sinh tại đây..."></textarea>
+              </div>
+
+              <div style="margin-top: 20px; display:flex; gap:12px;">
+                <button type="button" class="btn-main" style="width:auto; padding:14px 28px;" onclick="saveTeacherEvaluation()">
+                  <span>💾</span> <span>LƯU KẾT QUẢ ĐÁNH GIÁ</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MODAL XÁC NHẬN NỘP BÀI -->
+  <div class="modal-overlay" id="modalSubmitConfirm">
+    <div class="modal-box">
+      <div style="font-size: 50px; margin-bottom: 10px;">📬</div>
+      <h3 style="font-family:'Quicksand', sans-serif; font-size:1.35rem; color:#1E3A8A; margin-bottom: 8px;">XÁC NHẬN NỘP BÀI</h3>
+      <p style="color:var(--text-muted); font-size:1rem; line-height:1.5;">Em đã hoàn thành việc phân loại từ ngữ và muốn nộp bài cho Giáo viên ngay bây giờ?</p>
+      <div class="modal-actions-row">
+        <button type="button" class="btn-action btn-reset" style="padding:12px 24px; font-size:1rem;" onclick="closeSubmitConfirmModal()">Xem lại bài</button>
+        <button type="button" class="btn-action btn-submit" style="padding:12px 28px; font-size:1rem;" onclick="processFinalSubmission()">Đồng ý nộp bài</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL XÁC NHẬN LÀM LẠI -->
+  <div class="modal-overlay" id="modalResetConfirm">
+    <div class="modal-box">
+      <div style="font-size: 46px; margin-bottom: 10px;">🔄</div>
+      <h3 style="font-family:'Quicksand', sans-serif; font-size:1.3rem; color:#991B1B; margin-bottom: 8px;">LÀM LẠI BÀI TẬP?</h3>
+      <p style="color:var(--text-muted); font-size:0.95rem;">Toàn bộ thẻ từ em đã chọn sẽ được đưa về vị trí ban đầu. Em có chắc chắn muốn làm lại?</p>
+      <div class="modal-actions-row">
+        <button type="button" class="btn-action btn-reset" style="padding:10px 20px; font-size:0.95rem;" onclick="closeResetConfirmModal()">Hủy bỏ</button>
+        <button type="button" class="btn-action" style="padding:10px 24px; font-size:0.95rem; background:#EF4444; color:white;" onclick="processResetGame()">Làm lại từ đầu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL XÁC NHẬN XÓA BÀI NỘP CỦA GIÁO VIÊN -->
+  <div class="modal-overlay" id="modalClearConfirm">
+    <div class="modal-box">
+      <div style="font-size: 46px; margin-bottom: 10px;">⚠️</div>
+      <h3 style="font-family:'Quicksand', sans-serif; font-size:1.3rem; color:#991B1B; margin-bottom: 8px;">XÓA TOÀN BỘ BÀI NỘP?</h3>
+      <p style="color:var(--text-muted); font-size:0.95rem;">Thao tác này sẽ xóa vĩnh viễn toàn bộ bài làm của học sinh trong danh sách. Bạn có chắc chắn muốn tiếp tục?</p>
+      <div class="modal-actions-row">
+        <button type="button" class="btn-action btn-reset" style="padding:10px 20px; font-size:0.95rem;" onclick="closeClearConfirmModal()">Hủy bỏ</button>
+        <button type="button" class="btn-action" style="padding:10px 24px; font-size:0.95rem; background:#EF4444; color:white;" onclick="processClearSubmissions()">Đồng ý xóa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ĐÁNH GIÁ ĐÚNG / SAI -->
+  <div class="modal-overlay" id="modalEval">
+    <div class="modal-box">
+      <h3 style="font-family:'Quicksand', sans-serif; font-size:1.3rem; color:#1E293B;">CHỌN KẾT QUẢ ĐÁNH GIÁ</h3>
+      <p style="color:#64748B; font-size:0.95rem; margin-top:6px;" id="modalEvalSubtitle">Đánh giá cho ô kiểm tra</p>
+      
+      <div class="eval-choice-btns">
+        <button type="button" class="btn-choice btn-choice-correct" onclick="applyEvalChoice('ĐÚNG')">
+          ✓ ĐÚNG
+        </button>
+        <button type="button" class="btn-choice btn-choice-wrong" onclick="applyEvalChoice('SAI')">
+          ✗ SAI
+        </button>
+      </div>
+
+      <button type="button" class="btn-choice-clear" onclick="applyEvalChoice('')">Để trống ô này</button>
+    </div>
+  </div>
+
+  <!-- MODAL THÔNG BÁO CHUNG -->
+  <div class="modal-overlay" id="modalAlert">
+    <div class="modal-box">
+      <div id="modalAlertIcon" style="font-size: 50px; margin-bottom: 12px;">🎉</div>
+      <h3 id="modalAlertTitle" style="font-family:'Quicksand', sans-serif; font-size:1.4rem; color:#1E3A8A; margin-bottom: 8px;">Chúc mừng em!</h3>
+      <p id="modalAlertMsg" style="color:var(--text-muted); font-size:1rem; line-height:1.5; margin-bottom: 20px;"></p>
+      <button type="button" class="btn-main" id="modalAlertBtn" onclick="closeAlertModal()">ĐÃ HIỂU RỒI Ạ</button>
+    </div>
+  </div>
+
+  <script>
+    const STORY_PARAGRAPHS = [
+      // Đoạn 1
+      [
+        { w: "Bét-tô-ven" }, { s: " " }, { w: "là" }, { s: " " }, { w: "nhà soạn nhạc" }, { s: " " },
+        { w: "cổ điển" }, { s: " " }, { w: "vĩ đại" }, { s: " " }, { w: "trên" }, { s: " " },
+        { w: "thế giới" }, { s: ". " }, { w: "Ông" }, { s: " " }, { w: "đã" }, { s: " " },
+        { w: "sáng tác" }, { s: " " }, { w: "nhiều" }, { s: " " }, { w: "bản nhạc" }, { s: " " },
+        { w: "nổi tiếng" }, { s: ", " }, { w: "trong số đó" }, { s: " " }, { w: "có" }, { s: " " },
+        { w: "Bản xô-nát Ánh trăng" }, { s: "." }
+      ],
+      // Đoạn 2
+      [
+        { w: "Tương truyền" }, { s: ", " }, { w: "vào" }, { s: " " }, { w: "một" }, { s: " " },
+        { w: "đêm trăng" }, { s: " " }, { w: "sáng" }, { s: ", " }, { w: "Bét-tô-ven" }, { s: " " },
+        { w: "đến" }, { s: " " }, { w: "cây cầu" }, { s: " " }, { w: "bắc qua" }, { s: " " },
+        { w: "dòng sông" }, { s: " " }, { w: "Đa-nuýp" }, { s: " " }, { w: "xinh đẹp" }, { s: " " },
+        { w: "trong" }, { s: " " }, { w: "thành Viên" }, { s: ". " }, { w: "Đứng" }, { s: " " },
+        { w: "trên" }, { s: " " }, { w: "cầu" }, { s: ", " }, { w: "ông" }, { s: " " },
+        { w: "say sưa" }, { s: " " }, { w: "ngắm" }, { s: " " }, { w: "dòng sông" }, { s: " " },
+        { w: "lấp lánh" }, { s: " " }, { w: "ánh trăng" }, { s: " " }, { w: "trong" }, { s: " " },
+        { w: "một" }, { s: " " }, { w: "không gian" }, { s: " " }, { w: "tĩnh lặng" }, { s: ". " },
+        { w: "Bỗng" }, { s: " " }, { w: "Bét-tô-ven" }, { s: " " }, { w: "nghe thấy" }, { s: " " },
+        { w: "tiếng dương cầm" }, { s: " " }, { w: "văng vẳng" }, { s: " " }, { w: "ở" }, { s: " " },
+        { w: "phía xa" }, { s: ". " }, { w: "Tiếng đàn" }, { s: " " }, { w: "đã" }, { s: " " },
+        { w: "đưa" }, { s: " " }, { w: "bước chân" }, { s: " " }, { w: "Bét-tô-ven" }, { s: " " },
+        { w: "đến" }, { s: " " }, { w: "một" }, { s: " " }, { w: "ngôi nhà" }, { s: " " },
+        { w: "trong" }, { s: " " }, { w: "khu lao động" }, { s: ". " }, { w: "Đến đó" }, { s: ", " },
+        { w: "ông" }, { s: " " }, { w: "bắt gặp" }, { s: " " }, { w: "một" }, { s: " " },
+        { w: "người cha" }, { s: " " }, { w: "đang" }, { s: " " }, { w: "chăm chú" }, { s: " " },
+        { w: "ngồi" }, { s: " " }, { w: "nghe" }, { s: " " }, { w: "cô con gái mù" }, { s: " " },
+        { w: "của mình" }, { s: " " }, { w: "chơi đàn" }, { s: "." }
+      ],
+      // Đoạn 3
+      [
+        { w: "Thấy" }, { s: " " }, { w: "Bét-tô-ven" }, { s: ", " }, { w: "người cha" }, { s: " " },
+        { w: "đau khổ" }, { s: " " }, { w: "chia sẻ" }, { s: " " }, { w: "rằng" }, { s: ": " },
+        { w: "Con gái" }, { s: " " }, { w: "ông" }, { s: " " }, { w: "có" }, { s: " " },
+        { w: "một" }, { s: " " }, { w: "ước mơ" }, { s: " " }, { w: "duy nhất" }, { s: " " },
+        { w: "là" }, { s: " " }, { w: "được" }, { s: " " }, { w: "ngắm nhìn" }, { s: " " },
+        { w: "ánh trăng" }, { s: " " }, { w: "trên" }, { s: " " }, { w: "dòng Đa-nuýp" }, { s: ". " },
+        { w: "Nhưng" }, { s: " " }, { w: "ông" }, { s: " " }, { w: "rất" }, { s: " " },
+        { w: "buồn" }, { s: " " }, { w: "vì" }, { s: " " }, { w: "chẳng bao giờ" }, { s: " " },
+        { w: "ông" }, { s: " " }, { w: "có thể" }, { s: " " }, { w: "giúp" }, { s: " " },
+        { w: "con" }, { s: " " }, { w: "thực hiện" }, { s: " " }, { w: "được" }, { s: " " },
+        { w: "ước mơ" }, { s: " " }, { w: "của mình" }, { s: "." }
+      ],
+      // Đoạn 4
+      [
+        { w: "Xúc động" }, { s: " " }, { w: "trước" }, { s: " " }, { w: "tình cảm" }, { s: " " },
+        { w: "của" }, { s: " " }, { w: "người cha" }, { s: " " }, { w: "dành cho" }, { s: " " },
+        { w: "con gái" }, { s: " " }, { w: "và" }, { s: " " }, { w: "tiếng dương cầm" }, { s: " " },
+        { w: "da diết" }, { s: " " }, { w: "của" }, { s: " " }, { w: "người thiếu nữ mù" }, { s: ", " },
+        { w: "Bét-tô-ven" }, { s: " " }, { w: "đến bên" }, { s: " " }, { w: "cây đàn" }, { s: ", " },
+        { w: "ngồi xuống" }, { s: " " }, { w: "và" }, { s: " " }, { w: "bắt đầu" }, { s: " " },
+        { w: "chơi" }, { s: ". " }, { w: "Những" }, { s: " " }, { w: "nốt nhạc" }, { s: " " },
+        { w: "ngẫu hứng" }, { s: " " }, { w: "vang lên" }, { s: ", " }, { w: "tràn đầy" }, { s: " " },
+        { w: "cảm xúc" }, { s: " " }, { w: "yêu thương" }, { s: " " }, { w: "của" }, { s: " " },
+        { w: "nhà soạn nhạc" }, { s: " " }, { w: "thiên tài" }, { s: ", " }, { w: "lúc" }, { s: " " },
+        { w: "êm ái" }, { s: ", " }, { w: "nhẹ nhàng" }, { s: " " }, { w: "như" }, { s: " " },
+        { w: "ánh trăng" }, { s: ", " }, { w: "lúc lại" }, { s: " " }, { w: "mạnh mẽ" }, { s: " " },
+        { w: "như" }, { s: " " }, { w: "sóng" }, { s: " " }, { w: "sông Đa-nuýp" }, { s: ". " },
+        { w: "Trong" }, { s: " " }, { w: "tâm trí" }, { s: " " }, { w: "của" }, { s: " " },
+        { w: "hai cha con" }, { s: ", " }, { w: "dường như" }, { s: " " }, { w: "không còn" }, { s: " " },
+        { w: "cuộc sống" }, { s: " " }, { w: "khổ đau" }, { s: " " }, { w: "vì" }, { s: " " },
+        { w: "tật bệnh" }, { s: ", " }, { w: "chỉ còn" }, { s: " " }, { w: "một" }, { s: " " },
+        { w: "thế giới" }, { s: " " }, { w: "huyền ảo" }, { s: ", " }, { w: "lung linh" }, { s: ", " },
+        { w: "tràn ngập" }, { s: " " }, { w: "ánh trăng" }, { s: ". " }, { w: "Cô gái mù" }, { s: " " },
+        { w: "có" }, { s: " " }, { w: "cảm giác" }, { s: " " }, { w: "mình" }, { s: " " },
+        { w: "đang được" }, { s: " " }, { w: "ngắm nhìn" }, { s: ", " }, { w: "đùa giỡn" }, { s: " " },
+        { w: "với" }, { s: " " }, { w: "ánh trăng" }, { s: " " }, { w: "trên" }, { s: " " },
+        { w: "dòng sông" }, { s: " " }, { w: "Đa-nuýp" }, { s: "." }
+      ],
+      // Đoạn 5
+      [
+        { w: "Bản xô-nát Ánh trăng" }, { s: " " }, { w: "ra đời" }, { s: " " }, { w: "từ đó" }, { s: "." }
+      ]
+    ];
+
+    const STORAGE_KEY = 'DANHA_MOONLIGHT_SUBMISSIONS_V3';
+
+    let currentStudent = {
+      name: '',
+      studentClass: '',
+      code: 'XONAT2026'
+    };
+
+    let selectedTokens = new Map();
+    let isTeacherLoggedIn = false;
+    let currentReviewingSubmissionId = null;
+    let activeEvalTarget = { group: null, index: null };
+    let isSoundOn = true;
+
+    /* Web Audio API */
+    let audioCtx = null;
+    function playTone(freq, type = 'sine', duration = 0.22) {
+      if (!isSoundOn) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      isSoundOn = !isSoundOn;
+      document.getElementById('soundIcon').textContent = isSoundOn ? '🔔' : '🔕';
+      document.getElementById('soundLabel').textContent = isSoundOn ? 'Âm thanh' : 'Đã tắt';
+      if (isSoundOn) playTone(587.33);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderReadingPassage();
+      loadSubmissionsFromStorage();
+    });
+
+    /* HIỂN THỊ VĂN BẢN ĐỌC SGK VỚI SỰ TÁCH TỪ HỢP LÝ */
+    function renderReadingPassage() {
+      const container = document.getElementById('readingContainer');
+      container.innerHTML = '';
+
+      let globalTokenIndex = 0;
+
+      STORY_PARAGRAPHS.forEach((pTokens) => {
+        const pEl = document.createElement('p');
+
+        pTokens.forEach((item) => {
+          if (item.s) {
+            pEl.appendChild(document.createTextNode(item.s));
+          }
+          if (item.w) {
+            const tokenId = 'word_' + (globalTokenIndex++);
+            const span = document.createElement('span');
+            span.className = 'selectable-word';
+            span.id = tokenId;
+            span.textContent = item.w;
+            span.dataset.cleanWord = item.w.trim();
+            
+            span.addEventListener('click', () => handleWordClick(tokenId, item.w.trim()));
+            pEl.appendChild(span);
+          }
+        });
+
+        container.appendChild(pEl);
+      });
+    }
+
+    function handleWordClick(tokenId, cleanWord) {
+      const spanEl = document.getElementById(tokenId);
+      if (!spanEl) return;
+
+      if (selectedTokens.has(tokenId)) {
+        removeCardByTokenId(tokenId);
+        playTone(330, 'triangle', 0.2);
+      } else {
+        selectedTokens.set(tokenId, {
+          id: tokenId,
+          text: cleanWord,
+          location: 'tray'
+        });
+        spanEl.classList.add('selected');
+        renderWordCard(tokenId, cleanWord, 'tray');
+        playTone(659.25, 'sine', 0.25);
+      }
+
+      updateTrayCounter();
+    }
+
+    function removeCardByTokenId(tokenId) {
+      if (!selectedTokens.has(tokenId)) return;
+
+      selectedTokens.delete(tokenId);
+      const spanEl = document.getElementById(tokenId);
+      if (spanEl) spanEl.classList.remove('selected');
+
+      const cardEl = document.getElementById('card_' + tokenId);
+      if (cardEl) cardEl.remove();
+
+      updateZoneHints();
+      updateTrayCounter();
+    }
+
+    function renderWordCard(tokenId, text, destination) {
+      const card = document.createElement('div');
+      card.className = 'word-card';
+      card.id = 'card_' + tokenId;
+      card.draggable = true;
+      card.dataset.tokenId = tokenId;
+
+      const textSpan = document.createElement('span');
+      textSpan.textContent = text;
+      card.appendChild(textSpan);
+
+      const removeBtn = document.createElement('span');
+      removeBtn.className = 'card-remove-btn';
+      removeBtn.innerHTML = '×';
+      removeBtn.title = 'Gỡ thẻ';
+      removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        removeCardByTokenId(tokenId);
+      });
+      card.appendChild(removeBtn);
+
+      setupDragEvents(card);
+
+      let container = document.getElementById('trayDropzone');
+      if (destination === 'river') container = document.getElementById('zoneRiver');
+      else if (destination === 'music') container = document.getElementById('zoneMusic');
+
+      container.appendChild(card);
+      updateZoneHints();
+    }
+
+    function updateTrayCounter() {
+      const total = selectedTokens.size;
+      const counterEl = document.getElementById('trayCounter');
+      if (counterEl) counterEl.textContent = total + ' thẻ';
+    }
+
+    function updateZoneHints() {
+      const trayHint = document.getElementById('trayHint');
+      const riverHint = document.getElementById('riverHint');
+      const musicHint = document.getElementById('musicHint');
+
+      const trayCards = document.getElementById('trayDropzone').querySelectorAll('.word-card');
+      const riverCards = document.getElementById('zoneRiver').querySelectorAll('.word-card');
+      const musicCards = document.getElementById('zoneMusic').querySelectorAll('.word-card');
+
+      if (trayHint) trayHint.style.display = trayCards.length === 0 ? 'block' : 'none';
+      if (riverHint) riverHint.style.display = riverCards.length === 0 ? 'block' : 'none';
+      if (musicHint) musicHint.style.display = musicCards.length === 0 ? 'block' : 'none';
+    }
+
+    let draggedTokenId = null;
+
+    function setupDragEvents(cardEl) {
+      cardEl.addEventListener('dragstart', (e) => {
+        draggedTokenId = cardEl.dataset.tokenId;
+        e.dataTransfer.setData('text/plain', draggedTokenId);
+        setTimeout(() => cardEl.style.opacity = '0.5', 0);
+      });
+
+      cardEl.addEventListener('dragend', () => {
+        cardEl.style.opacity = '1';
+        draggedTokenId = null;
+        document.querySelectorAll('.dropzone-card').forEach(z => z.classList.remove('drag-over'));
+      });
+
+      let clone = null;
+
+      cardEl.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        draggedTokenId = cardEl.dataset.tokenId;
+
+        clone = cardEl.cloneNode(true);
+        clone.style.position = 'fixed';
+        clone.style.zIndex = '9999';
+        clone.style.pointerEvents = 'none';
+        clone.style.opacity = '0.85';
+        clone.style.left = (touch.clientX - 40) + 'px';
+        clone.style.top = (touch.clientY - 20) + 'px';
+        document.body.appendChild(clone);
+      }, { passive: true });
+
+      cardEl.addEventListener('touchmove', (e) => {
+        if (!clone) return;
+        const touch = e.touches[0];
+        clone.style.left = (touch.clientX - 40) + 'px';
+        clone.style.top = (touch.clientY - 20) + 'px';
+
+        const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (targetElement) {
+          const zoneCard = targetElement.closest('.dropzone-card') || targetElement.closest('.tray-section');
+          document.querySelectorAll('.dropzone-card').forEach(z => z.classList.remove('drag-over'));
+          if (zoneCard && zoneCard.classList.contains('dropzone-card')) {
+            zoneCard.classList.add('drag-over');
+          }
+        }
+      }, { passive: true });
+
+      cardEl.addEventListener('touchend', (e) => {
+        if (clone) {
+          clone.remove();
+          clone = null;
+        }
+
+        const touch = e.changedTouches[0];
+        const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+        document.querySelectorAll('.dropzone-card').forEach(z => z.classList.remove('drag-over'));
+
+        if (targetElement) {
+          const riverZone = targetElement.closest('.zone-river');
+          const musicZone = targetElement.closest('.zone-music');
+          const trayZone = targetElement.closest('.tray-section');
+
+          if (riverZone) moveCardToZone(draggedTokenId, 'river');
+          else if (musicZone) moveCardToZone(draggedTokenId, 'music');
+          else if (trayZone) moveCardToZone(draggedTokenId, 'tray');
+        }
+
+        draggedTokenId = null;
+      });
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      const dropzoneCard = e.currentTarget.closest('.dropzone-card');
+      if (dropzoneCard) dropzoneCard.classList.add('drag-over');
+    }
+
+    function handleDrop(e, targetZone) {
+      e.preventDefault();
+      const dropzoneCard = e.currentTarget.closest('.dropzone-card');
+      if (dropzoneCard) dropzoneCard.classList.remove('drag-over');
+
+      const tokenId = e.dataTransfer.getData('text/plain') || draggedTokenId;
+      if (tokenId) {
+        moveCardToZone(tokenId, targetZone);
+      }
+    }
+
+    function moveCardToZone(tokenId, targetZone) {
+      const cardEl = document.getElementById('card_' + tokenId);
+      const tokenData = selectedTokens.get(tokenId);
+      if (!cardEl || !tokenData) return;
+
+      tokenData.location = targetZone;
+
+      let destinationContainer = document.getElementById('trayDropzone');
+      if (targetZone === 'river') destinationContainer = document.getElementById('zoneRiver');
+      else if (targetZone === 'music') destinationContainer = document.getElementById('zoneMusic');
+
+      destinationContainer.appendChild(cardEl);
+      updateZoneHints();
+      playTone(targetZone === 'music' ? 783.99 : 523.25, 'triangle', 0.2);
+    }
+
+    function switchScreen(screenId) {
+      document.querySelectorAll('.view-screen').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(screenId);
+      if (target) target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startAdventure() {
+      const name = document.getElementById('inputStudentName').value.trim();
+      const studentClass = document.getElementById('inputStudentClass').value.trim();
+      const code = document.getElementById('inputAssignmentCode').value.trim();
+
+      if (!name) {
+        showAlert('Em hãy nhập Họ và Tên của mình trước khi bắt đầu nhé!', 'Nhắc nhở nhẹ', '📝');
+        return;
+      }
+      if (!studentClass) {
+        showAlert('Em hãy nhập Tên Lớp của mình nhé!', 'Nhắc nhở nhẹ', '🏫');
+        return;
+      }
+
+      currentStudent.name = name;
+      currentStudent.studentClass = studentClass;
+      currentStudent.code = code || 'XONAT2026';
+
+      document.getElementById('displayStudentName').textContent = name;
+      document.getElementById('displayStudentClass').textContent = studentClass;
+      document.getElementById('displayAssignmentCode').textContent = currentStudent.code;
+
+      switchScreen('screenGame');
+      playTone(523.25, 'sine', 0.3);
+    }
+
+    /* QUY TRÌNH NỘP BÀI */
+    function openSubmitConfirmModal() {
+      const riverCards = [];
+      const musicCards = [];
+      const trayCards = [];
+
+      selectedTokens.forEach((item) => {
+        if (item.location === 'river') riverCards.push(item.text);
+        else if (item.location === 'music') musicCards.push(item.text);
+        else trayCards.push(item.text);
+      });
+
+      if (riverCards.length === 0 && musicCards.length === 0) {
+        showAlert('Em chưa xếp thẻ từ nào vào 2 nhóm. Hãy kéo các thẻ vào nhóm "Tính từ chỉ đặc điểm của dòng sông" hoặc "Tính từ chỉ đặc điểm của tiếng nhạc" trước khi nộp nhé!', 'Chưa hoàn thành', '💡');
+        return;
+      }
+
+      document.getElementById('modalSubmitConfirm').classList.add('active');
+    }
+
+    function closeSubmitConfirmModal() {
+      document.getElementById('modalSubmitConfirm').classList.remove('active');
+    }
+
+    function processFinalSubmission() {
+      closeSubmitConfirmModal();
+
+      const riverCards = [];
+      const musicCards = [];
+      const trayCards = [];
+
+      selectedTokens.forEach((item) => {
+        if (item.location === 'river') riverCards.push(item.text);
+        else if (item.location === 'music') musicCards.push(item.text);
+        else trayCards.push(item.text);
+      });
+
+      const newSubmission = {
+        id: 'sub_' + Date.now(),
+        studentName: currentStudent.name,
+        studentClass: currentStudent.studentClass,
+        assignmentCode: currentStudent.code,
+        timestamp: new Date().toLocaleString('vi-VN'),
+        riverWords: riverCards,
+        musicWords: musicCards,
+        trayWords: trayCards,
+        evalRiver: ['', '', ''],
+        evalMusic: ['', '', ''],
+        teacherAddedRiver: [],
+        teacherAddedMusic: [],
+        teacherComment: '',
+        isReviewed: false
+      };
+
+      const list = getStoredSubmissions();
+      list.unshift(newSubmission);
+      saveSubmissionsToStorage(list);
+
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 75, spread: 65, origin: { y: 0.6 } });
+      }
+
+      showAlert(
+        'Chúc mừng em ' + currentStudent.name + ' đã hoàn thành bài khám phá! Bài làm của em đã được gửi an toàn đến Giáo viên.',
+        'Nộp bài thành công!',
+        '🎉',
+        () => {
+          resetGameBoard();
+          document.getElementById('inputStudentName').value = '';
+          document.getElementById('inputStudentClass').value = '';
+          switchScreen('screenIntro');
+        }
+      );
+    }
+
+    /* QUY TRÌNH LÀM LẠI */
+    function openResetConfirmModal() {
+      document.getElementById('modalResetConfirm').classList.add('active');
+    }
+
+    function closeResetConfirmModal() {
+      document.getElementById('modalResetConfirm').classList.remove('active');
+    }
+
+    function processResetGame() {
+      closeResetConfirmModal();
+      resetGameBoard();
+    }
+
+    function resetGameBoard() {
+      selectedTokens.clear();
+      document.querySelectorAll('.selectable-word').forEach(span => span.classList.remove('selected'));
+      document.querySelectorAll('.word-card').forEach(card => card.remove());
+      updateZoneHints();
+      updateTrayCounter();
+    }
+
+    /* LƯU TRỮ VÀ XÓA BÀI NỘP */
+    function getStoredSubmissions() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveSubmissionsToStorage(list) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      } catch (e) {}
+    }
+
+    function loadSubmissionsFromStorage() {
+      renderSubmissionsTable();
+    }
+
+    function openClearConfirmModal() {
+      document.getElementById('modalClearConfirm').classList.add('active');
+    }
+
+    function closeClearConfirmModal() {
+      document.getElementById('modalClearConfirm').classList.remove('active');
+    }
+
+    function processClearSubmissions() {
+      closeClearConfirmModal();
+      localStorage.removeItem(STORAGE_KEY);
+      renderSubmissionsTable();
+      showAlert('Đã dọn sạch toàn bộ bài nộp cũ thành công!', 'Thông báo', '🗑️');
+    }
+
+    /* GIÁO VIÊN */
+    function toggleTeacherView() {
+      const teacherScreen = document.getElementById('screenTeacher');
+      if (teacherScreen.classList.contains('active')) {
+        document.getElementById('teacherBtnText').textContent = 'Dành cho Giáo viên';
+        switchScreen('screenIntro');
+      } else {
+        document.getElementById('teacherBtnText').textContent = 'Quay lại Game';
+        switchScreen('screenTeacher');
+        if (isTeacherLoggedIn) {
+          showTeacherDashboard();
+        } else {
+          showTeacherLogin();
+        }
+      }
+    }
+
+    function showTeacherLogin() {
+      document.getElementById('teacherLoginCard').style.display = 'block';
+      document.getElementById('teacherContent').style.display = 'none';
+      document.getElementById('inputTeacherPassword').value = '';
+    }
+
+    function showTeacherDashboard() {
+      document.getElementById('teacherLoginCard').style.display = 'none';
+      document.getElementById('teacherContent').style.display = 'block';
+      backToSubmissionsList();
+      renderSubmissionsTable();
+    }
+
+    function loginTeacher() {
+      const pwd = document.getElementById('inputTeacherPassword').value.trim();
+      if (pwd === '123456') {
+        isTeacherLoggedIn = true;
+        showTeacherDashboard();
+        playTone(523.25, 'triangle', 0.2);
+      } else {
+        showAlert('Mật khẩu quản trị chưa chính xác. Vui lòng nhập mật khẩu: 123456', 'Đăng nhập thất bại', '🔒');
+      }
+    }
+
+    function logoutTeacher() {
+      isTeacherLoggedIn = false;
+      showTeacherLogin();
+    }
+
+    function renderSubmissionsTable() {
+      const tbody = document.getElementById('submissionsTableBody');
+      const hint = document.getElementById('noSubmissionsHint');
+      const submissions = getStoredSubmissions();
+
+      tbody.innerHTML = '';
+
+      if (submissions.length === 0) {
+        hint.style.display = 'block';
+        return;
+      }
+
+      hint.style.display = 'none';
+
+      submissions.forEach((sub, idx) => {
+        const tr = document.createElement('tr');
+        const statusHtml = sub.isReviewed
+          ? '<span class="status-pill status-reviewed">Đã nhận xét</span>'
+          : '<span class="status-pill status-new">Chưa chấm</span>';
+
+        tr.innerHTML = `
+          <td><strong>#${idx + 1}</strong></td>
+          <td><strong>${sub.studentName}</strong></td>
+          <td>${sub.studentClass}</td>
+          <td><code>${sub.assignmentCode}</code></td>
+          <td>${sub.timestamp}</td>
+          <td>${statusHtml}</td>
+          <td>
+            <button type="button" class="btn-view-work" onclick="openStudentSubmissionDetail('${sub.id}')">
+              👁️ XEM BÀI
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function backToSubmissionsList() {
+      document.getElementById('submissionsListView').style.display = 'block';
+      document.getElementById('submissionDetailView').style.display = 'none';
+      currentReviewingSubmissionId = null;
+      renderSubmissionsTable();
+    }
+
+    function openStudentSubmissionDetail(submissionId) {
+      const submissions = getStoredSubmissions();
+      const sub = submissions.find(s => s.id === submissionId);
+      if (!sub) return;
+
+      currentReviewingSubmissionId = submissionId;
+
+      document.getElementById('submissionsListView').style.display = 'none';
+      document.getElementById('submissionDetailView').style.display = 'block';
+
+      const banner = document.getElementById('reviewStudentBanner');
+      banner.innerHTML = `
+        <div>👦 Học sinh: <strong style="color:#1E40AF;">${sub.studentName}</strong></div>
+        <div>🏫 Lớp: <strong>${sub.studentClass}</strong></div>
+        <div>🔑 Mã bài tập: <strong>${sub.assignmentCode}</strong></div>
+        <div>⏰ Thời gian nộp: <strong>${sub.timestamp}</strong></div>
+      `;
+
+      sub.teacherAddedRiver = sub.teacherAddedRiver || [];
+      sub.teacherAddedMusic = sub.teacherAddedMusic || [];
+
+      renderReviewGroupWords('river', sub.riverWords, sub.teacherAddedRiver);
+      renderReviewGroupWords('music', sub.musicWords, sub.teacherAddedMusic);
+
+      sub.evalRiver = sub.evalRiver || ['', '', ''];
+      sub.evalMusic = sub.evalMusic || ['', '', ''];
+
+      for (let i = 0; i < 3; i++) {
+        updateSquareDisplay('river', i, sub.evalRiver[i]);
+        updateSquareDisplay('music', i, sub.evalMusic[i]);
+      }
+
+      document.getElementById('teacherCommentText').value = sub.teacherComment || '';
+    }
+
+    function renderReviewGroupWords(group, studentWords, teacherWords) {
+      const containerId = group === 'river' ? 'reviewWordsRiver' : 'reviewWordsMusic';
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      const sWords = studentWords || [];
+      const tWords = teacherWords || [];
+
+      if (sWords.length === 0 && tWords.length === 0) {
+        container.innerHTML = '<span style="color:#94A3B8; font-style:italic; font-size:0.9rem;">(Chưa có từ ngữ nào trong nhóm này)</span>';
+        return;
+      }
+
+      // 1. Thẻ từ do học sinh chọn (Màu xanh dương)
+      sWords.forEach(w => {
+        const badge = document.createElement('span');
+        badge.className = 'word-badge-review';
+        badge.textContent = w;
+        container.appendChild(badge);
+      });
+
+      // 2. Thẻ từ do giáo viên bổ sung (Màu tím/lavender khác biệt)
+      tWords.forEach((tw, idx) => {
+        const badge = document.createElement('span');
+        badge.className = 'word-badge-teacher';
+        badge.innerHTML = `<span>${tw}</span><span class="badge-remove-btn" title="Xóa từ này" onclick="removeTeacherWord('${group}', ${idx})">×</span>`;
+        container.appendChild(badge);
+      });
+    }
+
+    function addTeacherWord(group) {
+      if (!currentReviewingSubmissionId) return;
+      const inputId = group === 'river' ? 'inputAddRiver' : 'inputAddMusic';
+      const input = document.getElementById(inputId);
+      const val = input.value.trim();
+
+      if (!val) return;
+
+      const submissions = getStoredSubmissions();
+      const sub = submissions.find(s => s.id === currentReviewingSubmissionId);
+      if (!sub) return;
+
+      if (group === 'river') {
+        sub.teacherAddedRiver = sub.teacherAddedRiver || [];
+        sub.teacherAddedRiver.push(val);
+        renderReviewGroupWords('river', sub.riverWords, sub.teacherAddedRiver);
+      } else {
+        sub.teacherAddedMusic = sub.teacherAddedMusic || [];
+        sub.teacherAddedMusic.push(val);
+        renderReviewGroupWords('music', sub.musicWords, sub.teacherAddedMusic);
+      }
+
+      saveSubmissionsToStorage(submissions);
+      input.value = '';
+      input.focus();
+      playTone(659.25, 'triangle', 0.15);
+    }
+
+    function removeTeacherWord(group, wordIdx) {
+      if (!currentReviewingSubmissionId) return;
+      const submissions = getStoredSubmissions();
+      const sub = submissions.find(s => s.id === currentReviewingSubmissionId);
+      if (!sub) return;
+
+      if (group === 'river' && sub.teacherAddedRiver) {
+        sub.teacherAddedRiver.splice(wordIdx, 1);
+        renderReviewGroupWords('river', sub.riverWords, sub.teacherAddedRiver);
+      } else if (group === 'music' && sub.teacherAddedMusic) {
+        sub.teacherAddedMusic.splice(wordIdx, 1);
+        renderReviewGroupWords('music', sub.musicWords, sub.teacherAddedMusic);
+      }
+
+      saveSubmissionsToStorage(submissions);
+      playTone(392.00, 'triangle', 0.15);
+    }
+
+    function openEvalModal(group, index) {
+      activeEvalTarget = { group, index };
+      const groupName = group === 'river' ? 'Nhóm A: Dòng sông' : 'Nhóm B: Tiếng nhạc';
+      document.getElementById('modalEvalSubtitle').textContent = `${groupName} • Ô số ${index + 1}`;
+      document.getElementById('modalEval').classList.add('active');
+    }
+
+    function applyEvalChoice(choiceValue) {
+      if (activeEvalTarget.group && activeEvalTarget.index !== null) {
+        updateSquareDisplay(activeEvalTarget.group, activeEvalTarget.index, choiceValue);
+      }
+      document.getElementById('modalEval').classList.remove('active');
+      activeEvalTarget = { group: null, index: null };
+    }
+
+    function updateSquareDisplay(group, index, value) {
+      const prefix = group === 'river' ? 'River' : 'Music';
+      const sqEl = document.getElementById(`sq${prefix}${index}`);
+      const valEl = document.getElementById(`val${prefix}${index}`);
+
+      if (!sqEl || !valEl) return;
+
+      sqEl.classList.remove('is-correct', 'is-wrong');
+
+      if (value === 'ĐÚNG') {
+        sqEl.classList.add('is-correct');
+        valEl.textContent = 'ĐÚNG';
+      } else if (value === 'SAI') {
+        sqEl.classList.add('is-wrong');
+        valEl.textContent = 'SAI';
+      } else {
+        valEl.textContent = '-';
+      }
+
+      sqEl.dataset.currentVal = value || '';
+    }
+
+    function saveTeacherEvaluation() {
+      if (!currentReviewingSubmissionId) return;
+
+      const submissions = getStoredSubmissions();
+      const sub = submissions.find(s => s.id === currentReviewingSubmissionId);
+      if (!sub) return;
+
+      const evalRiver = [
+        document.getElementById('sqRiver0').dataset.currentVal || '',
+        document.getElementById('sqRiver1').dataset.currentVal || '',
+        document.getElementById('sqRiver2').dataset.currentVal || ''
+      ];
+
+      const evalMusic = [
+        document.getElementById('sqMusic0').dataset.currentVal || '',
+        document.getElementById('sqMusic1').dataset.currentVal || '',
+        document.getElementById('sqMusic2').dataset.currentVal || ''
+      ];
+
+      const comment = document.getElementById('teacherCommentText').value.trim();
+
+      sub.evalRiver = evalRiver;
+      sub.evalMusic = evalMusic;
+      sub.teacherComment = comment;
+      sub.isReviewed = true;
+
+      saveSubmissionsToStorage(submissions);
+      showAlert('Toàn bộ kết quả đánh giá và nhận xét đã được lưu trữ thành công!', 'Đã lưu nhận xét', '✅');
+    }
+
+    let alertCallback = null;
+    function showAlert(msg, title = 'Thông báo', icon = '💡', callback = null) {
+      document.getElementById('modalAlertMsg').textContent = msg;
+      document.getElementById('modalAlertTitle').textContent = title;
+      document.getElementById('modalAlertIcon').textContent = icon;
+      alertCallback = callback;
+      document.getElementById('modalAlert').classList.add('active');
+    }
+
+    function closeAlertModal() {
+      document.getElementById('modalAlert').classList.remove('active');
+      if (typeof alertCallback === 'function') {
+        const cb = alertCallback;
+        alertCallback = null;
+        cb();
+      }
+    }
+  </script>
+</body>
+</html>
